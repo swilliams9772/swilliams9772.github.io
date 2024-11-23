@@ -1,26 +1,15 @@
 "use client"
 
 import React from 'react'
-import { motion, Variants } from 'framer-motion'
+import { motion } from 'framer-motion'
 import { Button } from '@/components/ui/button'
-import { Github, Linkedin } from 'lucide-react'
+import { Github, Linkedin, Mail, Phone, ArrowRight } from 'lucide-react'
+import { SectionLayout } from './ui/section-layout'
+import { cn } from '@/lib/utils'
+import { transitions } from '@/lib/utils/theme-config'
+import type { SocialLink } from '@/types'
 
-interface ContactInfo {
-  email: string
-  phone: string
-}
-
-const contactInfo: ContactInfo = {
-  email: "shaq.williams.ai@gmail.com",
-  phone: "(917) 831-2482"
-}
-
-const fadeInUp: Variants = {
-  initial: { opacity: 0, y: 20 },
-  animate: { opacity: 1, y: 0 }
-}
-
-const socialLinks = [
+const socialLinks: SocialLink[] = [
   {
     href: "https://github.com/swilliams9772",
     icon: Github,
@@ -33,67 +22,109 @@ const socialLinks = [
   }
 ]
 
-const Hero: React.FC = () => {
+const contactInfo = {
+  email: "shaq.williams.ai@gmail.com",
+  phone: "(917) 831-2482"
+}
+
+const Hero = () => {
   return (
-    <section className="relative overflow-hidden py-20 sm:py-32 bg-primary-foreground">
+    <SectionLayout id="hero" pattern="dots" gradient="blue">
       <div className="container mx-auto px-4">
-        <motion.div
-          initial="initial"
-          animate="animate"
-          transition={{ duration: 0.5 }}
-          className="relative z-10 mx-auto max-w-3xl text-center"
-        >
-          <motion.h1
-            variants={fadeInUp}
-            transition={{ delay: 0.2, duration: 0.5 }}
-            className="text-4xl font-bold tracking-tight text-primary sm:text-6xl"
-          >
-            Shaquille Williams
-          </motion.h1>
+        <div className="relative z-10 mx-auto max-w-4xl text-center">
           <motion.div
-            variants={fadeInUp}
-            transition={{ delay: 0.3, duration: 0.5 }}
-            className="mt-4 flex justify-center space-x-4"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5 }}
+          >
+            <h1 className="text-4xl font-bold tracking-tight sm:text-6xl">
+              <span className="inline-block">
+                Building AI-Powered Solutions
+              </span>{" "}
+              <span className="inline-block text-primary">
+                for Social Impact
+              </span>
+            </h1>
+          </motion.div>
+
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.2, duration: 0.5 }}
+            className="mt-6 flex justify-center gap-4 text-sm"
           >
             <a 
-              href={`mailto:${contactInfo.email}`} 
-              className="text-muted-foreground hover:text-primary transition-colors"
+              href={`mailto:${contactInfo.email}`}
+              className="flex items-center gap-2 text-muted-foreground hover:text-primary transition-colors"
             >
+              <Mail className="h-4 w-4" />
               {contactInfo.email}
             </a>
             <span className="text-muted-foreground">|</span>
             <a 
-              href={`tel:${contactInfo.phone.replace(/\D/g, '')}`} 
-              className="text-muted-foreground hover:text-primary transition-colors"
+              href={`tel:${contactInfo.phone.replace(/\D/g, '')}`}
+              className="flex items-center gap-2 text-muted-foreground hover:text-primary transition-colors"
             >
+              <Phone className="h-4 w-4" />
               {contactInfo.phone}
             </a>
           </motion.div>
+
           <motion.p
-            variants={fadeInUp}
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.4, duration: 0.5 }}
-            className="mt-6 text-lg leading-8 text-muted-foreground"
+            className="mt-6 text-lg leading-8 text-muted-foreground max-w-3xl mx-auto"
           >
-            Senior Software Engineer, AI Specialist, and Community Organizer specializing in machine learning, 
-            generative AI, cybersecurity, and STEM education. Dedicated to developing AI-driven, open-source 
-            tools for impactful, equitable social change.
+            Senior Software Engineer and AI Specialist with a passion for developing 
+            innovative solutions that drive positive social change. Experienced in 
+            machine learning, cloud architecture, and community-driven technology initiatives.
           </motion.p>
+
           <motion.div
-            variants={fadeInUp}
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.6, duration: 0.5 }}
-            className="mt-10 flex items-center justify-center gap-x-6"
+            className="mt-10 flex flex-col sm:flex-row items-center justify-center gap-4"
           >
-            <Button asChild>
-              <a href="#projects">View Projects</a>
+            <Button size="lg" asChild>
+              <a href="#projects" className="flex items-center gap-2">
+                View Projects
+                <ArrowRight className="h-4 w-4" />
+              </a>
             </Button>
-            <Button variant="outline" asChild>
-              <a href="#contact">Contact Me</a>
+            <Button size="lg" variant="outline" asChild>
+              <a href="#contact">Get in Touch</a>
             </Button>
           </motion.div>
-        </motion.div>
+
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.8, duration: 0.5 }}
+            className="mt-10 flex justify-center gap-6"
+          >
+            {socialLinks.map((link, index) => (
+              <motion.a
+                key={link.label}
+                href={link.href}
+                target="_blank"
+                rel="noopener noreferrer"
+                whileHover={{ scale: 1.1 }}
+                whileTap={{ scale: 0.95 }}
+                className={cn(
+                  "text-muted-foreground hover:text-primary",
+                  transitions.fast
+                )}
+              >
+                <link.icon className="h-6 w-6" />
+                <span className="sr-only">{link.label}</span>
+              </motion.a>
+            ))}
+          </motion.div>
+        </div>
       </div>
-      <div className="absolute inset-0 -z-10 bg-[linear-gradient(to_right,#8080800a_1px,transparent_1px),linear-gradient(to_bottom,#8080800a_1px,transparent_1px)] bg-[size:14px_24px]" />
-    </section>
+    </SectionLayout>
   )
 }
 

@@ -1,4 +1,5 @@
 import { JSX as JSXTypes } from 'react'
+import { LucideIcon } from 'lucide-react'
 
 declare global {
   namespace JSX {
@@ -27,6 +28,30 @@ export interface Project {
   featured?: boolean
   images?: string[]
   videoPreview?: string
+  metrics?: Metric[]
+  timeline?: TimelineItem[]
+  team?: TeamMember[]
+  status?: 'completed' | 'in-progress' | 'planned'
+}
+
+export interface Metric {
+  label: string
+  value: string
+  icon?: LucideIcon
+  description?: string
+}
+
+export interface TimelineItem {
+  phase: string
+  duration: string
+  description?: string
+  milestones?: string[]
+}
+
+export interface TeamMember {
+  role: string
+  count: number
+  responsibilities?: string[]
 }
 
 export interface Publication {
@@ -71,6 +96,12 @@ export interface Experience {
   description: string[]
   skills: string[]
   impact: string
+  metrics: Metric[]
+  achievements?: string[]
+  technologies?: string[]
+  location?: string
+  type?: 'full-time' | 'contract' | 'freelance'
+  remote?: boolean
 }
 
 export interface Education {
@@ -79,13 +110,28 @@ export interface Education {
   location: string
   period: string
   details: string
+  gpa?: string
   coursework: string[]
-  achievements: string[]
-  skills: string[]
+  research?: ResearchProject[]
+  skills: {
+    name: string
+    level: number
+  }[]
+  achievements: {
+    title: string
+    description: string
+    icon: LucideIcon
+  }[]
+}
+
+export interface ResearchProject {
+  title: string
+  description: string
+  outcomes: string[]
 }
 
 export interface ContactInfo {
-  icon: React.ComponentType<{ className?: string }>
+  icon: LucideIcon
   label: string
   value: string
   href: string | null
@@ -93,11 +139,20 @@ export interface ContactInfo {
 
 export interface SocialLink {
   href: string
-  icon: React.ComponentType<{ className?: string }>
+  icon: LucideIcon
   label: string
 }
 
 export interface NavItem {
   name: string
   href: string
-} 
+  icon?: LucideIcon
+  external?: boolean
+}
+
+export interface ThemeConfig {
+  name: string
+  className: string
+}
+
+export type Theme = 'light' | 'dark' | 'system' 

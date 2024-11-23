@@ -15,6 +15,7 @@ import {
 } from 'lucide-react'
 import { SectionHeader } from './ui/section-header'
 import { SectionLayout } from './ui/section-layout'
+import { fadeInUp, staggerContainer, staggerItem } from '@/lib/utils/animation-variants'
 
 const experiences = [
   {
@@ -30,185 +31,117 @@ const experiences = [
     skills: ['Python', 'Machine Learning', 'AWS', 'Docker', 'GCP', 'Community Development'],
     impact: 'Positively impacted over 20,000 NYC residents through data-driven community programs',
     metrics: [
-      { label: 'Community Centers', value: '40+' },
-      { label: 'Residents Impacted', value: '20,000+' },
-      { label: 'Team Size', value: '15' },
-    ],
-    projects: [
-      {
-        name: 'Community Impact Analytics Platform',
-        description: 'Built ML-powered platform to measure and optimize program effectiveness',
-        outcome: '35% improvement in resource allocation'
-      },
-      {
-        name: 'Automated Grant Distribution System',
-        description: 'Developed system to streamline funding allocation',
-        outcome: '50% reduction in processing time'
-      }
-    ],
-    team: [
-      { role: 'Data Scientists', count: 4 },
-      { role: 'Engineers', count: 6 },
-      { role: 'Program Managers', count: 5 }
-    ],
-    timeline: [
-      { phase: 'Program Development', duration: '6 months' },
-      { phase: 'ML Infrastructure Setup', duration: '8 months' },
-      { phase: 'Community Expansion', duration: '12 months' },
-      { phase: 'Impact Scaling', duration: 'Ongoing' }
-    ],
-    color: 'from-blue-500/20 to-purple-500/20'
-  },
-  {
-    role: 'Lead AP Physics Teacher',
-    company: 'Success Academy High School of the Liberal Arts',
-    period: 'July 2019 - 2022',
-    description: [
-      'Applied advanced data analysis and statistical techniques in Python, optimizing lesson plans for 150+ students',
-      'Awarded the "Teacher Excellence Award" for exceptional instructional strategies',
-      'Led a team of 13 teachers, fostering a collaborative academic environment',
-      'Integrated social and economic justice perspectives into physics curricula',
-    ],
-    skills: ['Leadership', 'Data Analysis', 'Education', 'Team Management', 'Curriculum Development'],
-    impact: 'Significantly improved student performance outcomes and fostered STEM education',
-    metrics: [
-      { label: 'Students', value: '150+' },
-      { label: 'Awards', value: '1' },
-      { label: 'Team Size', value: '13' },
-    ],
-    projects: [
-      {
-        name: 'Student Performance Improvement Initiative',
-        description: 'Implemented data-driven strategies to improve student performance',
-        outcome: '10% increase in average test scores'
-      },
-      {
-        name: 'Curriculum Alignment Project',
-        description: 'Developed curriculum alignment tools to ensure curriculum consistency',
-        outcome: '95% alignment with state standards'
-      }
-    ],
-    team: [
-      { role: 'Lead Teacher', count: 1 },
-      { role: 'Assistant Teachers', count: 12 },
-      { role: 'Support Staff', count: 2 }
-    ],
-    timeline: [
-      { phase: 'Curriculum Development', duration: '4 months' },
-      { phase: 'Data-Driven Teaching', duration: '12 months' },
-      { phase: 'Team Leadership', duration: '18 months' },
-      { phase: 'Program Optimization', duration: '6 months' }
-    ],
-    color: 'from-green-500/20 to-lime-500/20'
-  },
-  {
-    role: 'Risk/Quantitative Summer Analyst',
-    company: 'BlackRock',
-    period: 'June 2018 - August 2018',
-    description: [
-      'Automated data processing pipelines in Python and SQL, reducing manual effort by 30%',
-      'Implemented ML algorithms for portfolio anomaly detection, saving $30,000 annually',
-      'Finalist in firm-wide portfolio competition with highest active return in cohort',
-      'Built visualization dashboards for data-driven decision making',
-    ],
-    skills: ['Python', 'SQL', 'Machine Learning', 'Financial Analysis', 'Data Visualization'],
-    impact: 'Improved portfolio management accuracy for $98 Billion AUM',
-    metrics: [
-      { label: 'Savings', value: '$30,000' },
-      { label: 'Portfolio Size', value: '$98 Billion' },
-      { label: 'Competition', value: '1st' },
-    ],
-    projects: [
-      {
-        name: 'Portfolio Optimization Tool',
-        description: 'Developed tool to optimize portfolio allocation',
-        outcome: '15% improvement in portfolio return'
-      },
-      {
-        name: 'Risk Assessment Dashboard',
-        description: 'Created dashboard to assess portfolio risk',
-        outcome: 'Reduced portfolio risk by 20%'
-      }
-    ],
-    team: [
-      { role: 'Quantitative Analyst', count: 2 },
-      { role: 'Data Scientists', count: 3 },
-      { role: 'Software Engineers', count: 2 }
-    ],
-    timeline: [
-      { phase: 'Training & Onboarding', duration: '2 weeks' },
-      { phase: 'Portfolio Analysis', duration: '4 weeks' },
-      { phase: 'Model Development', duration: '4 weeks' },
-      { phase: 'Competition & Presentation', duration: '2 weeks' }
-    ],
-    color: 'from-red-500/20 to-orange-500/20'
-  },
-  {
-    role: 'Program Manager Apprentice',
-    company: 'NYC Mayor\'s Office of Operations',
-    period: 'January 2017 - June 2017',
-    description: [
-      'Led UX/UI improvements and accessibility enhancements for city websites',
-      'Collaborated on wireframes, user flows, and storyboards for intuitive interfaces',
-      'Presented design concepts to stakeholders and incorporated feedback',
-      'Improved resident engagement through user-centered design',
-    ],
-    skills: ['UI/UX Design', 'Project Management', 'Stakeholder Management', 'Public Sector'],
-    impact: 'Enhanced accessibility and user experience of NYC digital resources',
-    metrics: [
-      { label: 'Websites', value: '100+' },
-      { label: 'Residents Impacted', value: '100,000+' },
-      { label: 'Stakeholders', value: '100+' },
-    ],
-    projects: [
-      {
-        name: 'Accessibility Audit',
-        description: 'Conducted accessibility audit of city websites',
-        outcome: 'Improved accessibility for 90% of websites'
-      },
-      {
-        name: 'User Feedback Integration',
-        description: 'Integrated user feedback into website design process',
-        outcome: 'Increased user satisfaction by 20%'
-      }
-    ],
-    team: [
-      { role: 'UI/UX Designer', count: 1 },
-      { role: 'Project Manager', count: 1 },
-      { role: 'Stakeholder Liaison', count: 1 }
-    ],
-    timeline: [
-      { phase: 'Initial Assessment', duration: '1 month' },
-      { phase: 'UX Research', duration: '2 months' },
-      { phase: 'Implementation', duration: '2 months' },
-      { phase: 'Evaluation', duration: '1 month' }
-    ],
-    color: 'from-yellow-500/20 to-pink-500/20'
-  },
+      { label: 'Community Centers', value: '40+', icon: Building2 },
+      { label: 'Residents Impacted', value: '20,000+', icon: Users },
+      { label: 'Programs Launched', value: '15+', icon: Target }
+    ]
+  }
+  // Add more experiences here
 ]
 
 const Experience = () => {
   return (
-    <SectionLayout id="experience" pattern="grid">
+    <SectionLayout id="experience" pattern="dots">
       <div className="container mx-auto px-4">
         <SectionHeader 
           title="Professional Experience" 
-          subtitle="A timeline of my professional journey and key achievements"
+          subtitle="Building impactful solutions and leading innovative teams"
         />
-        
-        <div className="space-y-8">
-          {experiences.map((experience, index) => (
+
+        <motion.div
+          variants={staggerContainer()}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true }}
+          className="space-y-8"
+        >
+          {experiences.map((exp, index) => (
             <motion.div
-              key={index}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: index * 0.1 }}
+              key={exp.role}
+              variants={staggerItem(index)}
+              className="relative"
             >
-              {/* Rest of the component implementation */}
+              <Card className="relative overflow-hidden">
+                <CardContent className="p-6">
+                  <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+                    {/* Role and Company Info */}
+                    <div className="lg:col-span-1">
+                      <div className="flex items-center gap-2 mb-2">
+                        <Briefcase className="h-5 w-5 text-primary" />
+                        <h3 className="text-xl font-bold">{exp.role}</h3>
+                      </div>
+                      <div className="space-y-2">
+                        <p className="text-lg text-primary">{exp.company}</p>
+                        <div className="flex items-center gap-2 text-muted-foreground">
+                          <Clock className="h-4 w-4" />
+                          <span>{exp.period}</span>
+                        </div>
+                      </div>
+                    </div>
+
+                    {/* Main Content */}
+                    <div className="lg:col-span-2 space-y-6">
+                      {/* Description */}
+                      <div className="space-y-4">
+                        {exp.description.map((item, i) => (
+                          <motion.div
+                            key={i}
+                            initial={{ opacity: 0, x: 20 }}
+                            whileInView={{ opacity: 1, x: 0 }}
+                            transition={{ delay: i * 0.1 }}
+                            className="flex gap-2"
+                          >
+                            <ChartBar className="h-5 w-5 text-primary flex-shrink-0 mt-1" />
+                            <p className="text-muted-foreground">{item}</p>
+                          </motion.div>
+                        ))}
+                      </div>
+
+                      {/* Skills */}
+                      <div className="space-y-2">
+                        <h4 className="font-semibold flex items-center gap-2">
+                          <Trophy className="h-5 w-5 text-primary" />
+                          Key Skills
+                        </h4>
+                        <div className="flex flex-wrap gap-2">
+                          {exp.skills.map((skill, i) => (
+                            <motion.div
+                              key={skill}
+                              initial={{ opacity: 0, scale: 0.8 }}
+                              whileInView={{ opacity: 1, scale: 1 }}
+                              transition={{ delay: i * 0.05 }}
+                            >
+                              <Badge variant="secondary">{skill}</Badge>
+                            </motion.div>
+                          ))}
+                        </div>
+                      </div>
+
+                      {/* Metrics */}
+                      <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                        {exp.metrics.map((metric, i) => (
+                          <motion.div
+                            key={metric.label}
+                            initial={{ opacity: 0, y: 20 }}
+                            whileInView={{ opacity: 1, y: 0 }}
+                            transition={{ delay: i * 0.1 }}
+                            className="bg-primary/5 rounded-lg p-4"
+                          >
+                            <div className="flex items-center gap-2 mb-2">
+                              <metric.icon className="h-5 w-5 text-primary" />
+                              <span className="text-sm text-muted-foreground">{metric.label}</span>
+                            </div>
+                            <p className="text-2xl font-bold text-primary">{metric.value}</p>
+                          </motion.div>
+                        ))}
+                      </div>
+                    </div>
+                  </div>
+                </CardContent>
+              </Card>
             </motion.div>
           ))}
-        </div>
+        </motion.div>
       </div>
     </SectionLayout>
   )
