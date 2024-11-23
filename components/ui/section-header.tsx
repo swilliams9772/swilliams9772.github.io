@@ -1,7 +1,7 @@
 import React from 'react'
 import { motion } from 'framer-motion'
 import { cn } from '@/lib/utils'
-import { textGradients } from '@/lib/utils/theme-config'
+import { textGradients, transitions } from '@/lib/utils/theme-config'
 
 interface SectionHeaderProps {
   title: string
@@ -21,7 +21,8 @@ export const SectionHeader = ({
   return (
     <motion.div
       initial={{ opacity: 0, y: 20 }}
-      animate={{ opacity: 1, y: 0 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true }}
       transition={{ duration: 0.5 }}
       className={cn(
         'mb-12',
@@ -35,7 +36,8 @@ export const SectionHeader = ({
     >
       <h2 className={cn(
         'text-3xl font-bold mb-4',
-        textGradients[gradient]
+        textGradients[gradient],
+        transitions.fast
       )}>
         {title}
       </h2>
@@ -44,11 +46,19 @@ export const SectionHeader = ({
           {subtitle}
         </p>
       )}
-      <div className="mt-4 flex justify-center">
+      <div className={cn(
+        "mt-4",
+        {
+          'flex justify-center': align === 'center',
+          'flex justify-start': align === 'left',
+          'flex justify-end': align === 'right'
+        }
+      )}>
         <motion.div
           className="h-1 w-20 bg-gradient-to-r from-primary to-secondary rounded-full"
           initial={{ width: 0 }}
-          animate={{ width: 80 }}
+          whileInView={{ width: 80 }}
+          viewport={{ once: true }}
           transition={{ duration: 0.8, delay: 0.2 }}
         />
       </div>

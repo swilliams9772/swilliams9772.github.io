@@ -1,8 +1,9 @@
 "use client"
 
-import React, { useState, useEffect } from 'react'
+import React, { useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
-import { Card, CardContent, CardFooter, CardHeader, CardTitle } from '@/components/ui/card'
+import Image from 'next/image'
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Badge } from '@/components/ui/badge'
 import { Button } from '@/components/ui/button'
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } from '@/components/ui/dialog'
@@ -155,7 +156,7 @@ const Projects = () => {
     difficulty: 'All' 
   })
   const [searchTerm, setSearchTerm] = useState('')
-  const [sortOption, setSortOption] = useState('date')
+  const [sortOption, setSortOption] = useState('recent')
   const [currentPage, setCurrentPage] = useState(1)
   const [displayedProjects, setDisplayedProjects] = useState(projects)
   const projectsPerPage = 6

@@ -7,6 +7,8 @@ import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
 import { Button } from '@/components/ui/button'
 import { ChevronLeft, ChevronRight, Quote, Star, Building2, Target, Trophy } from 'lucide-react'
 import { Badge } from '@/components/ui/badge'
+import { SectionLayout } from './ui/section-layout'
+import { SectionHeader } from './ui/section-header'
 
 const testimonials = [
   {
@@ -65,32 +67,6 @@ const testimonials = [
 const Testimonials = () => {
   const [activeIndex, setActiveIndex] = useState(0)
   const [direction, setDirection] = useState(0)
-  const [isHovered, setIsHovered] = useState(false)
-
-  const slideVariants = {
-    enter: (direction: number) => ({
-      x: direction > 0 ? 1000 : -1000,
-      opacity: 0,
-      scale: 0.95
-    }),
-    center: {
-      zIndex: 1,
-      x: 0,
-      opacity: 1,
-      scale: 1
-    },
-    exit: (direction: number) => ({
-      zIndex: 0,
-      x: direction < 0 ? 1000 : -1000,
-      opacity: 0,
-      scale: 0.95
-    })
-  }
-
-  const swipeConfidenceThreshold = 10000
-  const swipePower = (offset: number, velocity: number) => {
-    return Math.abs(offset) * velocity
-  }
 
   const paginate = (newDirection: number) => {
     setDirection(newDirection)
@@ -102,10 +78,30 @@ const Testimonials = () => {
     })
   }
 
+  const slideVariants = {
+    enter: (direction: number) => ({
+      x: direction > 0 ? 1000 : -1000,
+      opacity: 0
+    }),
+    center: {
+      zIndex: 1,
+      x: 0,
+      opacity: 1
+    },
+    exit: (direction: number) => ({
+      zIndex: 0,
+      x: direction < 0 ? 1000 : -1000,
+      opacity: 0
+    })
+  }
+
   return (
-    <section id="testimonials" className="py-20 bg-background relative overflow-hidden">
+    <SectionLayout id="testimonials" pattern="dots">
       <div className="container mx-auto px-4">
-        <h2 className="text-3xl font-bold text-center mb-12">Client Testimonials</h2>
+        <SectionHeader 
+          title="Client Testimonials" 
+          subtitle="Hear what others say about our collaboration and results"
+        />
         
         <div className="relative h-[600px]">
           <AnimatePresence initial={false} custom={direction}>
@@ -124,22 +120,10 @@ const Testimonials = () => {
               drag="x"
               dragConstraints={{ left: 0, right: 0 }}
               dragElastic={1}
-              onDragEnd={(e, { offset, velocity }) => {
-                const swipe = swipePower(offset.x, velocity.x)
-                if (swipe < -swipeConfidenceThreshold) {
-                  paginate(1)
-                } else if (swipe > swipeConfidenceThreshold) {
-                  paginate(-1)
-                }
-              }}
               className="absolute w-full"
-              onHoverStart={() => setIsHovered(true)}
-              onHoverEnd={() => setIsHovered(false)}
             >
               <Card 
-                className={`bg-gradient-to-r ${testimonials[activeIndex].color} p-8 max-w-4xl mx-auto transform transition-all duration-300 ${
-                  isHovered ? 'scale-[1.02]' : ''
-                }`}
+                className={`bg-gradient-to-r ${testimonials[activeIndex].color} p-8 max-w-4xl mx-auto transform transition-all duration-300`}
               >
                 <CardContent className="relative">
                   <Quote className="absolute text-primary/20 h-24 w-24 -top-4 -left-4 -z-10" />
@@ -244,7 +228,7 @@ const Testimonials = () => {
           </Button>
         </div>
       </div>
-    </section>
+    </SectionLayout>
   )
 }
 

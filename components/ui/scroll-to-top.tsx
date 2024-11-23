@@ -4,17 +4,15 @@ import { useState, useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { Button } from '@/components/ui/button'
 import { ArrowUp } from 'lucide-react'
+import { cn } from '@/lib/utils'
+import { transitions } from '@/lib/utils/theme-config'
 
 export const ScrollToTop = () => {
   const [isVisible, setIsVisible] = useState(false)
 
   useEffect(() => {
     const toggleVisibility = () => {
-      if (window.pageYOffset > 300) {
-        setIsVisible(true)
-      } else {
-        setIsVisible(false)
-      }
+      setIsVisible(window.pageYOffset > 300)
     }
 
     window.addEventListener('scroll', toggleVisibility)
@@ -41,7 +39,11 @@ export const ScrollToTop = () => {
             size="icon"
             variant="outline"
             onClick={scrollToTop}
-            className="rounded-full h-12 w-12 bg-background/80 backdrop-blur-sm hover:bg-background"
+            className={cn(
+              "rounded-full h-12 w-12 bg-background/80 backdrop-blur-sm",
+              "hover:bg-background hover:scale-110",
+              transitions.fast
+            )}
           >
             <ArrowUp className="h-6 w-6" />
           </Button>

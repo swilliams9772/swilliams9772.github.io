@@ -10,15 +10,12 @@ import {
   Target, 
   Lightbulb, 
   ArrowRight, 
-  Code2, 
-  Workflow,
-  Layers,
-  Microscope,
+  Code2,
   GitPullRequest,
-  Star,
-  Users,
-  Clock
+  Star
 } from 'lucide-react'
+import { SectionHeader } from './ui/section-header'
+import { SectionLayout } from './ui/section-layout'
 
 const caseStudies = [
   {
@@ -92,6 +89,7 @@ const caseStudies = [
 ]
 
 const CaseStudies = () => {
+  const [selectedCategory, setSelectedCategory] = useState<string>('All')
   const [expandedStudy, setExpandedStudy] = useState<string | null>(null)
   const [activeTab, setActiveTab] = useState<'overview' | 'details' | 'team'>('overview')
 
