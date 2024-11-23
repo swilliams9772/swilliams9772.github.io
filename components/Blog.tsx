@@ -7,7 +7,7 @@ import { Badge } from '@/components/ui/badge'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Tabs, TabsList, TabsTrigger } from '@/components/ui/tabs'
-import { Search, Calendar, Clock, ArrowRight, Tag, BookOpen, Code, Brain, Heart, Lightbulb } from 'lucide-react'
+import { Search, Calendar, Clock, ArrowRight, Tag, BookOpen, Code, Brain, Heart, Lightbulb, Eye } from 'lucide-react'
 
 const blogPosts = [
   {
