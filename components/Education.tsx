@@ -16,16 +16,16 @@ const educationData = [
     details: 'Focus on Computational Physics, Data Science, and Quantitative Analysis',
     gpa: '3.8',
     coursework: [
-      { name: 'Machine Learning', grade: 'A' },
-      { name: 'Data Structures', grade: 'A' },
-      { name: 'Computational Physics', grade: 'A-' },
-      { name: 'Network Science', grade: 'A' },
-      { name: 'Data Visualization', grade: 'A' },
-      { name: 'Quantum Mechanics', grade: 'A' },
-      { name: 'Statistical Mechanics', grade: 'A' },
-      { name: 'Mathematical Physics', grade: 'A' },
-      { name: 'Differential Equations', grade: 'A' },
-      { name: 'Linear Algebra', grade: 'A' }
+      'Machine Learning',
+      'Data Structures',
+      'Computational Physics',
+      'Network Science',
+      'Data Visualization',
+      'Quantum Mechanics',
+      'Statistical Mechanics',
+      'Mathematical Physics',
+      'Differential Equations',
+      'Linear Algebra'
     ],
     research: [
       {
@@ -116,6 +116,101 @@ const educationData = [
       }
     ],
     color: 'from-blue-500/20 to-purple-500/20'
+  },
+  {
+    degree: 'High School Diploma - Mechanical Engineering Major',
+    institution: 'Brooklyn Technical High School',
+    location: 'Brooklyn, New York',
+    period: '2009 - 2013',
+    details: 'Specialized in Mechanical Engineering with additional focus on Mandarin language studies',
+    gpa: '3.9',
+    coursework: [
+      'Mechanical Engineering Design',
+      'CNC Programming & Operation',
+      'CAD/CAM Systems',
+      'Machine Shop Practice',
+      'Mandarin Chinese',
+      'Engineering Mathematics',
+      'Materials Science',
+      'Technical Drawing'
+    ],
+    research: [
+      {
+        title: 'Advanced Manufacturing Projects',
+        description: 'Gained hands-on experience with industrial manufacturing equipment and processes',
+        outcomes: [
+          'Operated CNC mills and lathes for precision parts manufacturing',
+          'Developed proficiency in G-code programming for CNC machines',
+          'Created complex mechanical assemblies using various machine tools'
+        ]
+      },
+      {
+        title: 'Engineering Design Projects',
+        description: 'Participated in comprehensive engineering design and fabrication projects',
+        outcomes: [
+          'Designed and fabricated mechanical components using CAD/CAM software',
+          'Utilized 3D printing and rapid prototyping techniques',
+          'Implemented quality control and testing procedures'
+        ]
+      }
+    ],
+    achievements: [
+      {
+        title: 'Technical Excellence',
+        description: 'Mastered industrial-grade manufacturing equipment and processes',
+        icon: Brain
+      },
+      {
+        title: 'Language Proficiency',
+        description: 'Achieved proficiency in Mandarin Chinese language and cultural studies',
+        icon: Lightbulb
+      },
+      {
+        title: 'Engineering Projects',
+        description: 'Completed multiple hands-on engineering projects using advanced manufacturing tools',
+        icon: Award
+      }
+    ],
+    skills: [
+      { name: 'CNC Operation', level: 90 },
+      { name: 'Machine Shop', level: 85 },
+      { name: 'CAD/CAM', level: 90 },
+      { name: 'Technical Drawing', level: 85 },
+      { name: 'Mandarin Chinese', level: 80 },
+      { name: 'Engineering Design', level: 85 },
+      { name: 'Quality Control', level: 80 },
+      { name: 'Manufacturing', level: 85 }
+    ],
+    specializations: [
+      {
+        area: 'Manufacturing Technology',
+        topics: [
+          'CNC Programming',
+          'Machine Tool Operation',
+          'Manufacturing Processes',
+          'Quality Control'
+        ]
+      },
+      {
+        area: 'Engineering Design',
+        topics: [
+          'CAD/CAM Systems',
+          'Technical Drawing',
+          'Mechanical Design',
+          'Materials Science'
+        ]
+      },
+      {
+        area: 'Language Studies',
+        topics: [
+          'Mandarin Chinese',
+          'Technical Communication',
+          'Cultural Studies',
+          'Business Language'
+        ]
+      }
+    ],
+    color: 'from-orange-500/20 to-yellow-500/20'
   }
 ]
 
@@ -165,8 +260,7 @@ const Education = () => {
                               transition={{ delay: i * 0.1 }}
                               className="flex justify-between items-center bg-background/50 p-3 rounded-lg"
                             >
-                              <span>{course.name}</span>
-                              <Badge>{course.grade}</Badge>
+                              <span>{course}</span>
                             </motion.div>
                           ))}
                         </div>

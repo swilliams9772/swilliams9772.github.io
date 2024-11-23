@@ -3,7 +3,7 @@
 import React, { useState, useEffect } from 'react'
 import { useTheme } from 'next-themes'
 import { motion, AnimatePresence } from 'framer-motion'
-import { Moon, Sun, Menu, ChevronRight, Home, Code, Briefcase, Book, GraduationCap, Mail } from 'lucide-react'
+import { Moon, Sun, Menu, ChevronRight, Home, Code, Briefcase, Book, GraduationCap, Mail, Microscope } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import {
   Sheet,
@@ -18,6 +18,7 @@ const navItems = [
   { name: 'Skills', href: '#skills', icon: Code },
   { name: 'Experience', href: '#experience', icon: Briefcase },
   { name: 'Projects', href: '#projects', icon: Code },
+  { name: 'Case Studies', href: '#case-studies', icon: Microscope },
   { name: 'Publications', href: '#publications', icon: Book },
   { name: 'Education', href: '#education', icon: GraduationCap },
   { name: 'Contact', href: '#contact', icon: Mail },

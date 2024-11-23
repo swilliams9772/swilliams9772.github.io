@@ -1,11 +1,12 @@
 "use client"
 
-import React from 'react'
+import React, { useState, useRef, useEffect } from 'react'
 import { motion } from 'framer-motion'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Badge } from '@/components/ui/badge'
 import { Button } from '@/components/ui/button'
-import { Book, Presentation, Github, ExternalLink, Calendar, Award } from 'lucide-react'
+import { Book, Presentation, Github, ExternalLink, Calendar, Award, Video, Volume2, Play, Pause, Download, ArrowRight } from 'lucide-react'
+import { Progress } from '@/components/ui/progress'
 
 const publications = [
   {
@@ -14,6 +15,12 @@ const publications = [
     date: '2023',
     description: 'Comprehensive guide on Docker and Kubernetes solutions for production environments and open-source communities.',
     link: 'https://example.com/mastering-kubernetes',
+    media: {
+      type: 'video',
+      url: '/videos/kubernetes-overview.mp4',
+      thumbnail: '/images/kubernetes-thumb.jpg',
+      duration: '5:30'
+    }
   },
   {
     title: 'Machine Learning for Cybersecurity',
@@ -21,6 +28,11 @@ const publications = [
     date: '2023',
     description: 'Practical tutorials on building ethical, secure systems for social justice applications using machine learning.',
     link: 'https://example.com/ml-cybersecurity',
+    media: {
+      type: 'audio',
+      url: '/audio/ml-cybersecurity-podcast.mp3',
+      duration: '25:15'
+    }
   },
   {
     title: 'Hands-On Web Scraping with Python',
@@ -50,8 +62,22 @@ const workshops = [
     title: 'GraphNR Workshop 2023',
     event: 'Network Science Conference',
     date: 'September 2023',
-    description: 'Hands-on workshop covering network analysis fundamentals, practical applications, and simulations for social network analysis.',
+    description: 'Hands-on workshop covering network analysis fundamentals, practical applications, and simulations.',
     materials: 'https://example.com/graphnr-workshop',
+    recording: {
+      type: 'video',
+      url: '/videos/graphnr-workshop.mp4',
+      thumbnail: '/images/workshop-thumb.jpg',
+      duration: '1:45:00'
+    },
+    slides: {
+      url: '/slides/graphnr-workshop.pdf',
+      previewImages: [
+        '/images/slide1.jpg',
+        '/images/slide2.jpg',
+        '/images/slide3.jpg'
+      ]
+    }
   },
   {
     title: 'Hacktivism & Digital Security',
@@ -83,26 +109,167 @@ const workshops = [
   },
 ]
 
-const openSource = [
+const openSourceContributions = [
   {
-    title: 'Ultimate-Dork',
-    description: 'Web vulnerability detection tool with advanced security features.',
-    github: 'https://github.com/swilliams9772/ultimate-dork',
-    stars: '500+',
+    project: 'TensorFlow',
+    description: 'Contributed to documentation improvements and bug fixes in the core ML library',
+    contributions: [
+      'Enhanced documentation clarity for neural network components',
+      'Fixed issues in data preprocessing pipeline',
+      'Improved error handling in model training workflows'
+    ],
+    link: 'https://github.com/tensorflow/tensorflow'
   },
   {
-    title: 'OmniParser',
-    description: 'Dynamic data parsing tool for streamlining workflows in data-heavy projects.',
-    github: 'https://github.com/swilliams9772/omniparser',
-    stars: '300+',
+    project: 'Scikit-learn',
+    description: 'Contributed to enhancement of machine learning algorithms and documentation',
+    contributions: [
+      'Improved algorithm efficiency in clustering methods',
+      'Enhanced documentation for model evaluation metrics',
+      'Fixed bugs in cross-validation implementations'
+    ],
+    link: 'https://github.com/scikit-learn/scikit-learn'
   },
   {
-    title: 'MARE (Multi-Agent RL Environment)',
-    description: 'Educational framework for reinforcement learning applications.',
-    github: 'https://github.com/swilliams9772/mare',
-    stars: '400+',
-  },
+    project: 'Hugging Face Transformers',
+    description: 'Contributed to improvements in NLP model implementations',
+    contributions: [
+      'Enhanced tokenizer functionality',
+      'Improved documentation for fine-tuning procedures',
+      'Fixed memory optimization issues'
+    ],
+    link: 'https://github.com/huggingface/transformers'
+  }
 ]
+
+const MediaPlayer = ({ media }: { media: any }) => {
+  const [isPlaying, setIsPlaying] = useState(false)
+  const [progress, setProgress] = useState(0)
+  const [isReady, setIsReady] = useState(false)
+  const mediaRef = useRef<HTMLVideoElement | HTMLAudioElement>(null)
+
+  const togglePlay = async () => {
+    if (!mediaRef.current) return
+
+    try {
+      if (isPlaying) {
+        await mediaRef.current.pause()
+        setIsPlaying(false)
+      } else {
+        // Only attempt to play if the media is ready
+        if (isReady) {
+          const playPromise = mediaRef.current.play()
+          if (playPromise !== undefined) {
+            playPromise
+              .then(() => {
+                setIsPlaying(true)
+              })
+              .catch(error => {
+                console.error("Playback failed:", error)
+                setIsPlaying(false)
+              })
+          }
+        }
+      }
+    } catch (error) {
+      console.error("Media control error:", error)
+      setIsPlaying(false)
+    }
+  }
+
+  const handleTimeUpdate = () => {
+    if (mediaRef.current) {
+      const progress = (mediaRef.current.currentTime / mediaRef.current.duration) * 100
+      setProgress(progress)
+    }
+  }
+
+  const handleLoadedMetadata = () => {
+    setIsReady(true)
+  }
+
+  const handleError = (e: Event) => {
+    console.error("Media error:", e)
+    setIsPlaying(false)
+    setIsReady(false)
+  }
+
+  useEffect(() => {
+    const currentMedia = mediaRef.current
+    if (currentMedia) {
+      currentMedia.addEventListener('loadedmetadata', handleLoadedMetadata)
+      currentMedia.addEventListener('error', handleError)
+    }
+
+    return () => {
+      if (currentMedia) {
+        currentMedia.removeEventListener('loadedmetadata', handleLoadedMetadata)
+        currentMedia.removeEventListener('error', handleError)
+      }
+    }
+  }, [])
+
+  return (
+    <div className="relative rounded-lg overflow-hidden bg-background/50">
+      {media.type === 'video' ? (
+        <div className="aspect-video relative">
+          <video
+            ref={mediaRef as React.RefObject<HTMLVideoElement>}
+            src={media.url}
+            poster={media.thumbnail}
+            className="w-full h-full object-cover"
+            onTimeUpdate={handleTimeUpdate}
+            preload="metadata"
+            playsInline
+          />
+          <div 
+            className="absolute inset-0 flex items-center justify-center bg-black/50 opacity-0 hover:opacity-100 transition-opacity cursor-pointer"
+            onClick={togglePlay}
+          >
+            <Button
+              variant="ghost"
+              size="icon"
+              className="text-white hover:text-primary"
+              disabled={!isReady}
+            >
+              {isPlaying ? (
+                <Pause className="h-12 w-12" />
+              ) : (
+                <Play className="h-12 w-12" />
+              )}
+            </Button>
+          </div>
+        </div>
+      ) : (
+        <div className="p-4 flex items-center gap-4">
+          <Button
+            variant="ghost"
+            size="icon"
+            onClick={togglePlay}
+            className="hover:text-primary"
+            disabled={!isReady}
+          >
+            {isPlaying ? (
+              <Pause className="h-6 w-6" />
+            ) : (
+              <Play className="h-6 w-6" />
+            )}
+          </Button>
+          <audio
+            ref={mediaRef as React.RefObject<HTMLAudioElement>}
+            src={media.url}
+            onTimeUpdate={handleTimeUpdate}
+            preload="metadata"
+          />
+          <div className="flex-grow">
+            <Progress value={progress} className="h-2" />
+          </div>
+          <span className="text-sm text-muted-foreground">{media.duration}</span>
+        </div>
+      )}
+    </div>
+  )
+}
 
 const Publications = () => {
   return (
@@ -142,17 +309,36 @@ const Publications = () => {
                       {pub.date}
                     </div>
                     <p className="text-muted-foreground mb-4">{pub.description}</p>
-                    <Button asChild>
-                      <a 
-                        href={pub.link} 
-                        target="_blank" 
-                        rel="noopener noreferrer"
-                        className="flex items-center gap-2"
-                      >
-                        <ExternalLink className="h-4 w-4" />
-                        Read Publication
-                      </a>
-                    </Button>
+                    {pub.media && (
+                      <div className="mb-4">
+                        <MediaPlayer media={pub.media} />
+                      </div>
+                    )}
+                    <div className="flex gap-4">
+                      <Button asChild>
+                        <a 
+                          href={pub.link} 
+                          target="_blank" 
+                          rel="noopener noreferrer"
+                          className="flex items-center gap-2"
+                        >
+                          <ExternalLink className="h-4 w-4" />
+                          Read Publication
+                        </a>
+                      </Button>
+                      {pub.media && (
+                        <Button asChild variant="outline">
+                          <a 
+                            href={pub.media.url} 
+                            download
+                            className="flex items-center gap-2"
+                          >
+                            <Download className="h-4 w-4" />
+                            Download Media
+                          </a>
+                        </Button>
+                      )}
+                    </div>
                   </CardContent>
                 </Card>
               </motion.div>
@@ -209,46 +395,49 @@ const Publications = () => {
               </motion.div>
             ))}
 
-            <h3 className="text-2xl font-semibold flex items-center gap-2 mt-8">
+            <h3 className="text-2xl font-semibold flex items-center gap-2">
               <Github className="h-6 w-6 text-primary" />
-              Open Source Projects
+              Open Source Contributions
             </h3>
             <div className="grid grid-cols-1 gap-4">
-              {openSource.map((project, index) => (
+              {openSourceContributions.map((contribution, index) => (
                 <motion.div
                   key={index}
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.5, delay: index * 0.1 }}
-                  whileHover={{ scale: 1.02 }}
+                  transition={{ delay: index * 0.1 }}
                   className="transform transition-all duration-300"
                 >
                   <Card className="bg-gradient-to-r from-primary/5 to-secondary/5">
                     <CardContent className="pt-6">
                       <div className="flex justify-between items-start mb-4">
                         <div>
-                          <h4 className="text-lg font-semibold">{project.title}</h4>
-                          <p className="text-sm text-muted-foreground">{project.description}</p>
+                          <h4 className="text-lg font-semibold">{contribution.project}</h4>
+                          <p className="text-sm text-muted-foreground">{contribution.description}</p>
                         </div>
-                        <Badge 
-                          variant="outline"
-                          className="flex items-center gap-1"
-                        >
-                          <Award className="h-3 w-3" />
-                          {project.stars}
-                        </Badge>
+                        <Button asChild variant="outline" size="sm">
+                          <a 
+                            href={contribution.link} 
+                            target="_blank" 
+                            rel="noopener noreferrer"
+                            className="flex items-center gap-2"
+                          >
+                            <Github className="h-4 w-4" />
+                            View Project
+                          </a>
+                        </Button>
                       </div>
-                      <Button asChild variant="outline" size="sm">
-                        <a 
-                          href={project.github} 
-                          target="_blank" 
-                          rel="noopener noreferrer"
-                          className="flex items-center gap-2"
-                        >
-                          <Github className="h-4 w-4" />
-                          View on GitHub
-                        </a>
-                      </Button>
+                      <div className="space-y-2">
+                        {contribution.contributions.map((item, i) => (
+                          <div 
+                            key={i}
+                            className="flex items-center gap-2 text-sm text-muted-foreground"
+                          >
+                            <ArrowRight className="h-4 w-4 text-primary flex-shrink-0" />
+                            {item}
+                          </div>
+                        ))}
+                      </div>
                     </CardContent>
                   </Card>
                 </motion.div>

@@ -26,43 +26,58 @@ const skillCategories = [
     icon: '🤖'
   },
   {
-    category: 'Programming & Development',
+    category: 'Data Engineering & Analytics',
+    skills: [
+      { name: 'Data Engineering', level: 'Expert', years: 4, endorsed: 12 },
+      { name: 'Data Analytics', level: 'Expert', years: 5, endorsed: 12 },
+      { name: 'Data Mining', level: 'Advanced', years: 3, endorsed: 8 },
+      { name: 'Data Structures', level: 'Expert', years: 4, endorsed: 10 },
+      { name: 'Hadoop', level: 'Advanced', years: 2, endorsed: 6 },
+      { name: 'NoSQL', level: 'Advanced', years: 3, endorsed: 7 },
+      { name: 'MySQL', level: 'Expert', years: 4, endorsed: 8 },
+      { name: 'Dataset Management', level: 'Expert', years: 4, endorsed: 9 },
+    ],
+    icon: '📊'
+  },
+  {
+    category: 'Quantitative Analysis',
+    skills: [
+      { name: 'Quantitative Analytics', level: 'Expert', years: 4, endorsed: 8 },
+      { name: 'Quantitative Research', level: 'Expert', years: 3, endorsed: 7 },
+      { name: 'Risk Analysis', level: 'Advanced', years: 3, endorsed: 6 },
+      { name: 'Risk Management', level: 'Advanced', years: 3, endorsed: 5 },
+      { name: 'Statistical Analysis', level: 'Expert', years: 4, endorsed: 8 },
+      { name: 'Business Analysis', level: 'Advanced', years: 3, endorsed: 6 },
+      { name: 'Mathematical Modeling', level: 'Expert', years: 4, endorsed: 7 },
+    ],
+    icon: '📈'
+  },
+  {
+    category: 'Programming Languages',
     skills: [
       { name: 'Python', level: 'Expert', years: 5, endorsed: 19 },
       { name: 'C++', level: 'Advanced', years: 4, endorsed: 9 },
-      { name: 'JavaScript/TypeScript', level: 'Advanced', years: 3, endorsed: 7 },
-      { name: 'SQL', level: 'Advanced', years: 4, endorsed: 8 },
+      { name: 'JavaScript', level: 'Advanced', years: 3, endorsed: 7 },
       { name: 'R', level: 'Advanced', years: 3, endorsed: 7 },
       { name: 'MATLAB', level: 'Expert', years: 4, endorsed: 12 },
-      { name: 'Julia', level: 'Intermediate', years: 2, endorsed: 4 },
+      { name: 'C#', level: 'Advanced', years: 2, endorsed: 5 },
+      { name: 'C', level: 'Advanced', years: 3, endorsed: 6 },
+      { name: 'SQL', level: 'Expert', years: 4, endorsed: 8 },
     ],
     icon: '💻'
   },
   {
-    category: 'AI Frameworks & Tools',
+    category: 'Software Development',
     skills: [
-      { name: 'PyTorch', level: 'Expert', years: 3, endorsed: 4 },
-      { name: 'TensorFlow', level: 'Expert', years: 4, endorsed: 4 },
-      { name: 'Scikit-learn', level: 'Expert', years: 4, endorsed: 3 },
-      { name: 'Hugging Face', level: 'Expert', years: 2, endorsed: 2 },
-      { name: 'CUDA', level: 'Advanced', years: 2, endorsed: 2 },
-      { name: 'TensorRT', level: 'Advanced', years: 2, endorsed: 1 },
-      { name: 'MLflow', level: 'Advanced', years: 2, endorsed: 2 },
+      { name: 'Object-Oriented Programming', level: 'Expert', years: 4, endorsed: 8 },
+      { name: 'Software Development', level: 'Expert', years: 4, endorsed: 7 },
+      { name: 'Git', level: 'Expert', years: 4, endorsed: 8 },
+      { name: 'Project Management', level: 'Advanced', years: 3, endorsed: 6 },
+      { name: 'Agile Methodologies', level: 'Advanced', years: 3, endorsed: 5 },
+      { name: 'System Design', level: 'Advanced', years: 3, endorsed: 6 },
+      { name: 'API Development', level: 'Expert', years: 3, endorsed: 7 },
     ],
-    icon: '🛠️'
-  },
-  {
-    category: 'Data Science & Analytics',
-    skills: [
-      { name: 'Data Science', level: 'Expert', years: 5, endorsed: 16 },
-      { name: 'Data Analysis', level: 'Expert', years: 5, endorsed: 12 },
-      { name: 'Data Visualization', level: 'Expert', years: 4, endorsed: 8 },
-      { name: 'Data Mining', level: 'Advanced', years: 3, endorsed: 3 },
-      { name: 'Business Intelligence', level: 'Advanced', years: 3, endorsed: 2 },
-      { name: 'Predictive Modeling', level: 'Expert', years: 4, endorsed: 4 },
-      { name: 'Big Data Processing', level: 'Advanced', years: 3, endorsed: 3 },
-    ],
-    icon: '📈'
+    icon: '⚙️'
   },
   {
     category: 'Cloud & Infrastructure',
@@ -78,57 +93,43 @@ const skillCategories = [
     icon: '☁️'
   },
   {
-    category: 'Research & Analysis',
+    category: 'AI Frameworks & Tools',
     skills: [
-      { name: 'Research Methods', level: 'Expert', years: 5, endorsed: 10 },
-      { name: 'Experimental Design', level: 'Expert', years: 4, endorsed: 8 },
-      { name: 'Scientific Writing', level: 'Expert', years: 4, endorsed: 7 },
-      { name: 'Literature Review', level: 'Expert', years: 5, endorsed: 6 },
-      { name: 'Grant Writing', level: 'Advanced', years: 3, endorsed: 5 },
-      { name: 'Peer Review', level: 'Advanced', years: 3, endorsed: 4 },
-      { name: 'Technical Documentation', level: 'Expert', years: 4, endorsed: 6 },
-    ],
-    icon: '📚'
-  },
-  {
-    category: 'Tools & Technologies',
-    skills: [
-      { name: 'LaTeX', level: 'Expert', years: 5, endorsed: 8 },
-      { name: 'Git/GitHub', level: 'Expert', years: 4, endorsed: 9 },
-      { name: 'Linux/Unix', level: 'Expert', years: 4, endorsed: 8 },
-      { name: 'SolidWorks', level: 'Advanced', years: 3, endorsed: 7 },
-      { name: 'AutoCAD', level: 'Advanced', years: 3, endorsed: 7 },
-      { name: 'Arduino', level: 'Advanced', years: 3, endorsed: 8 },
-      { name: 'Raspberry Pi', level: 'Expert', years: 3, endorsed: 6 },
+      { name: 'PyTorch', level: 'Expert', years: 3, endorsed: 4 },
+      { name: 'TensorFlow', level: 'Expert', years: 4, endorsed: 4 },
+      { name: 'Scikit-learn', level: 'Expert', years: 4, endorsed: 3 },
+      { name: 'Hugging Face', level: 'Expert', years: 2, endorsed: 2 },
+      { name: 'CUDA', level: 'Advanced', years: 2, endorsed: 2 },
+      { name: 'TensorRT', level: 'Advanced', years: 2, endorsed: 1 },
+      { name: 'MLflow', level: 'Advanced', years: 2, endorsed: 2 },
     ],
     icon: '🛠️'
   },
   {
-    category: 'Soft Skills',
+    category: 'Engineering Tools',
     skills: [
-      { name: 'Technical Writing', level: 'Expert', years: 5, endorsed: 9 },
-      { name: 'Public Speaking', level: 'Expert', years: 4, endorsed: 8 },
-      { name: 'Project Management', level: 'Expert', years: 4, endorsed: 7 },
-      { name: 'Team Leadership', level: 'Expert', years: 4, endorsed: 8 },
-      { name: 'Mentoring', level: 'Expert', years: 4, endorsed: 7 },
-      { name: 'Problem Solving', level: 'Expert', years: 5, endorsed: 10 },
-      { name: 'Critical Thinking', level: 'Expert', years: 5, endorsed: 9 },
+      { name: 'SolidWorks', level: 'Advanced', years: 3, endorsed: 7 },
+      { name: 'AutoCAD', level: 'Advanced', years: 3, endorsed: 7 },
+      { name: 'Arduino', level: 'Advanced', years: 3, endorsed: 8 },
+      { name: 'Microsoft Excel', level: 'Expert', years: 5, endorsed: 15 },
+      { name: 'Technical Documentation', level: 'Expert', years: 4, endorsed: 8 },
+      { name: 'Engineering Design', level: 'Advanced', years: 3, endorsed: 6 },
+      { name: 'CAD/CAM', level: 'Advanced', years: 3, endorsed: 5 },
     ],
-    icon: '🤝'
+    icon: '🔧'
   },
   {
-    category: 'Physics & Mathematics',
+    category: 'Research & Academia',
     skills: [
-      { name: 'Quantum Mechanics', level: 'Expert', years: 4, endorsed: 8 },
-      { name: 'Statistical Mechanics', level: 'Expert', years: 4, endorsed: 7 },
-      { name: 'Mathematical Physics', level: 'Expert', years: 4, endorsed: 8 },
-      { name: 'Differential Equations', level: 'Expert', years: 5, endorsed: 9 },
-      { name: 'Linear Algebra', level: 'Expert', years: 5, endorsed: 10 },
-      { name: 'Complex Analysis', level: 'Advanced', years: 4, endorsed: 7 },
-      { name: 'Group Theory', level: 'Advanced', years: 3, endorsed: 6 },
-      { name: 'Numerical Methods', level: 'Expert', years: 4, endorsed: 8 },
+      { name: 'Research', level: 'Expert', years: 5, endorsed: 9 },
+      { name: 'Teaching', level: 'Expert', years: 4, endorsed: 8 },
+      { name: 'Public Speaking', level: 'Advanced', years: 3, endorsed: 7 },
+      { name: 'Technical Writing', level: 'Expert', years: 4, endorsed: 8 },
+      { name: 'Academic Research', level: 'Expert', years: 4, endorsed: 7 },
+      { name: 'Curriculum Development', level: 'Advanced', years: 3, endorsed: 6 },
+      { name: 'Mentoring', level: 'Expert', years: 4, endorsed: 7 },
     ],
-    icon: '🔬'
+    icon: '📚'
   }
 ]
 
