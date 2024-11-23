@@ -27,106 +27,72 @@ const contactInfo = {
   phone: "(917) 831-2482"
 }
 
-const Hero = () => {
+export const Hero = () => {
   return (
-    <SectionLayout id="hero" pattern="dots" gradient="blue">
+    <SectionLayout id="home" pattern="waves" className="py-24 md:py-32">
       <div className="container mx-auto px-4">
-        <div className="relative z-10 mx-auto max-w-4xl text-center">
-          <motion.div
+        <div className="max-w-4xl mx-auto text-center">
+          <motion.h1 
+            className="text-4xl md:text-6xl font-bold mb-6"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5 }}
           >
-            <h1 className="text-4xl font-bold tracking-tight sm:text-6xl">
-              <span className="inline-block">
-                Building AI-Powered Solutions
-              </span>{" "}
-              <span className="inline-block text-primary">
-                for Social Impact
-              </span>
-            </h1>
-          </motion.div>
-
-          <motion.div
+            Hi, I'm{' '}
+            <span className="bg-clip-text text-transparent bg-gradient-to-r from-primary to-secondary">
+              Shaquille Williams
+            </span>
+          </motion.h1>
+          
+          <motion.p 
+            className="text-xl md:text-2xl text-muted-foreground mb-8"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.2, duration: 0.5 }}
-            className="mt-6 flex justify-center gap-4 text-sm"
+            transition={{ duration: 0.5, delay: 0.1 }}
           >
-            <a 
-              href={`mailto:${contactInfo.email}`}
-              className="flex items-center gap-2 text-muted-foreground hover:text-primary transition-colors"
-            >
-              <Mail className="h-4 w-4" />
-              {contactInfo.email}
-            </a>
-            <span className="text-muted-foreground">|</span>
-            <a 
-              href={`tel:${contactInfo.phone.replace(/\D/g, '')}`}
-              className="flex items-center gap-2 text-muted-foreground hover:text-primary transition-colors"
-            >
-              <Phone className="h-4 w-4" />
-              {contactInfo.phone}
-            </a>
-          </motion.div>
-
-          <motion.p
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.4, duration: 0.5 }}
-            className="mt-6 text-lg leading-8 text-muted-foreground max-w-3xl mx-auto"
-          >
-            Senior Software Engineer and AI Specialist with a passion for developing 
-            innovative solutions that drive positive social change. Experienced in 
-            machine learning, cloud architecture, and community-driven technology initiatives.
+            AI Engineer & Full Stack Developer specializing in machine learning, voice synthesis, and scalable web applications
           </motion.p>
 
-          <motion.div
+          <motion.div 
+            className="flex flex-wrap justify-center gap-4 mb-12"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.6, duration: 0.5 }}
-            className="mt-10 flex flex-col sm:flex-row items-center justify-center gap-4"
-          >
-            <Button size="lg" asChild>
-              <a href="#projects" className="flex items-center gap-2">
-                View Projects
-                <ArrowRight className="h-4 w-4" />
-              </a>
-            </Button>
-            <Button size="lg" variant="outline" asChild>
-              <a href="#contact">Get in Touch</a>
-            </Button>
-          </motion.div>
-
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.8, duration: 0.5 }}
-            className="mt-10 flex justify-center gap-6"
+            transition={{ duration: 0.5, delay: 0.2 }}
           >
             {socialLinks.map((link, index) => (
-              <motion.a
-                key={link.label}
+              <a
+                key={link.href}
                 href={link.href}
                 target="_blank"
                 rel="noopener noreferrer"
-                whileHover={{ scale: 1.1 }}
-                whileTap={{ scale: 0.95 }}
                 className={cn(
-                  "text-muted-foreground hover:text-primary",
+                  "p-2 rounded-full hover:bg-primary/10",
                   transitions.fast
                 )}
               >
                 <link.icon className="h-6 w-6" />
-                <span className="sr-only">{link.label}</span>
-              </motion.a>
+              </a>
             ))}
+          </motion.div>
+
+          <motion.div
+            className="flex flex-wrap justify-center gap-4"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.3 }}
+          >
+            <Button asChild size="lg">
+              <a href="#contact" className="gap-2">
+                Contact Me <ArrowRight className="h-4 w-4" />
+              </a>
+            </Button>
+            <Button variant="outline" size="lg" asChild>
+              <a href="#projects">View Projects</a>
+            </Button>
           </motion.div>
         </div>
       </div>
     </SectionLayout>
   )
 }
-
-export default Hero
 

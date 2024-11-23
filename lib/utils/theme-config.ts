@@ -1,12 +1,10 @@
 export const gradients = {
-  primary: 'from-primary/5 to-secondary/5',
-  secondary: 'from-secondary/5 to-primary/5',
-  blue: 'from-blue-500/20 to-purple-500/20',
-  green: 'from-green-500/20 to-emerald-500/20',
-  orange: 'from-orange-500/20 to-red-500/20',
-  pink: 'from-pink-500/20 to-rose-500/20',
-  purple: 'from-purple-500/20 to-indigo-500/20',
-  accent: 'from-accent/5 to-accent/20'
+  primary: 'from-primary/10 via-primary/5 to-transparent',
+  secondary: 'from-secondary/10 via-secondary/5 to-transparent',
+  accent: 'from-accent/10 via-accent/5 to-transparent',
+  blue: 'from-blue-500/10 via-blue-500/5 to-transparent',
+  purple: 'from-purple-500/10 via-purple-500/5 to-transparent',
+  green: 'from-green-500/10 via-green-500/5 to-transparent'
 }
 
 export const shadows = {
@@ -19,17 +17,17 @@ export const shadows = {
 }
 
 export const transitions = {
-  fast: 'transition-all duration-200',
-  medium: 'transition-all duration-300',
-  slow: 'transition-all duration-500',
+  fast: 'transition-all duration-300',
+  medium: 'transition-all duration-500',
+  slow: 'transition-all duration-700',
   bounce: 'transition-all duration-300 ease-in-out hover:scale-105 active:scale-95'
 }
 
 export const glassEffect = {
-  light: 'bg-white/30 backdrop-blur-md',
-  dark: 'bg-black/30 backdrop-blur-md',
-  subtle: 'bg-background/80 backdrop-blur-sm',
-  strong: 'bg-background/90 backdrop-blur-lg'
+  light: 'bg-white/30 backdrop-blur-md border border-white/20',
+  dark: 'bg-black/30 backdrop-blur-md border border-white/10',
+  subtle: 'bg-background/80 backdrop-blur-sm border border-border/50',
+  strong: 'bg-background/90 backdrop-blur-lg border border-border'
 }
 
 export const borderStyles = {
@@ -49,8 +47,20 @@ export const hoverEffects = {
 }
 
 export const textGradients = {
-  primary: 'bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent',
-  blue: 'bg-gradient-to-r from-blue-500 to-purple-500 bg-clip-text text-transparent',
-  green: 'bg-gradient-to-r from-green-500 to-emerald-500 bg-clip-text text-transparent',
-  accent: 'bg-gradient-to-r from-accent to-accent/70 bg-clip-text text-transparent'
+  primary: 'bg-clip-text text-transparent bg-gradient-to-r from-primary to-secondary',
+  secondary: 'bg-clip-text text-transparent bg-gradient-to-r from-secondary to-primary',
+  accent: 'bg-clip-text text-transparent bg-gradient-to-r from-accent to-secondary'
+}
+
+export const patterns = {
+  dots: `bg-[radial-gradient(circle_at_center,_var(--tw-gradient-from)_1px,transparent_1px)] 
+         bg-[length:24px_24px] 
+         [mask-image:radial-gradient(ellipse_at_center,black_70%,transparent_100%)]`,
+  grid: `bg-[linear-gradient(to_right,_var(--tw-gradient-from)_1px,transparent_1px),
+         linear-gradient(to_bottom,_var(--tw-gradient-from)_1px,transparent_1px)] 
+         bg-[length:24px_24px]
+         [mask-image:radial-gradient(ellipse_at_center,black_70%,transparent_100%)]`,
+  waves: `bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-from)_0%,transparent_70%)]
+          [mask-image:radial-gradient(ellipse_at_center,black_70%,transparent_100%)]`,
+  none: ''
 } 

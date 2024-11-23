@@ -1,11 +1,9 @@
 import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
-import { ThemeProvider } from '@/components/theme-provider'
-import { Toaster } from "@/components/ui/toaster"
-import { ScrollProgress } from '@/components/ui/scroll-progress'
-import { ScrollToTop } from '@/components/ui/scroll-to-top'
-import { Analytics } from '@/components/analytics'
 import './globals.css'
+import { ThemeProvider } from '@/components/theme-provider'
+import { DotGridBackground } from '@/components/ui/dot-grid-background'
+import { Toaster } from '@/components/ui/toaster'
 
 const inter = Inter({ 
   subsets: ['latin'],
@@ -14,8 +12,8 @@ const inter = Inter({
 })
 
 export const metadata: Metadata = {
-  title: 'Shaquille Williams - Software Engineer Portfolio',
-  description: 'Full-stack developer specializing in AI/ML, web development, and cloud architecture.',
+  title: 'Shaquille Williams - Software Engineer & AI Specialist',
+  description: 'Portfolio showcasing AI/ML projects, full-stack development, and cloud architecture expertise',
   keywords: [
     'Software Engineer',
     'AI Engineer',
@@ -29,40 +27,6 @@ export const metadata: Metadata = {
   authors: [{ name: 'Shaquille Williams' }],
   creator: 'Shaquille Williams',
   publisher: 'Shaquille Williams',
-  robots: {
-    index: true,
-    follow: true,
-    googleBot: {
-      index: true,
-      follow: true,
-      'max-video-preview': -1,
-      'max-image-preview': 'large',
-      'max-snippet': -1,
-    },
-  },
-  openGraph: {
-    type: 'website',
-    locale: 'en_US',
-    url: 'https://swilliams9772.github.io',
-    title: 'Shaquille Williams - Software Engineer Portfolio',
-    description: 'Full-stack developer specializing in AI/ML, web development, and cloud architecture.',
-    siteName: 'Shaquille Williams Portfolio',
-    images: [
-      {
-        url: '/og-image.png',
-        width: 1200,
-        height: 630,
-        alt: 'Shaquille Williams Portfolio'
-      }
-    ]
-  },
-  twitter: {
-    card: 'summary_large_image',
-    title: 'Shaquille Williams - Software Engineer Portfolio',
-    description: 'Full-stack developer specializing in AI/ML, web development, and cloud architecture.',
-    creator: '@swilliams9772',
-    images: ['/og-image.png'],
-  }
 }
 
 export default function RootLayout({
@@ -72,24 +36,16 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" suppressHydrationWarning className={inter.variable}>
-      <head>
-        <link rel="icon" href="/favicon.ico" sizes="any" />
-        <link rel="icon" href="/icon.svg" type="image/svg+xml" />
-        <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
-        <link rel="manifest" href="/manifest.json" />
-      </head>
-      <body className={inter.className}>
+      <body className={`${inter.className} relative min-h-screen bg-background`}>
         <ThemeProvider 
           attribute="class" 
           defaultTheme="system" 
           enableSystem 
           disableTransitionOnChange
         >
-          <ScrollProgress />
+          <DotGridBackground />
           {children}
-          <ScrollToTop />
           <Toaster />
-          <Analytics />
         </ThemeProvider>
       </body>
     </html>

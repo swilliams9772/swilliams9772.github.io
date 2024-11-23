@@ -1,9 +1,9 @@
 "use client"
 
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import Image from 'next/image'
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
+import { Card, CardContent, CardHeader, CardTitle, CardFooter } from '@/components/ui/card'
 import { Badge } from '@/components/ui/badge'
 import { Button } from '@/components/ui/button'
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } from '@/components/ui/dialog'
@@ -14,7 +14,7 @@ import { Github, ExternalLink, Play, Pause, Eye, ChevronLeft, ChevronRight } fro
 import { sortProjects, filterProjects } from '@/lib/utils/project-utils'
 import type { Project } from '@/types'
 
-const projects = [
+const projects: Project[] = [
   {
     title: 'Voice Cloning & Audio Processing Suite',
     category: 'Audio Processing & AI',
@@ -31,114 +31,33 @@ const projects = [
     featured: true,
   },
   {
-    title: 'Community Grant Management System',
-    category: 'Full-Stack Development',
+    title: 'Community Resource Optimization Platform',
+    category: 'Full Stack & Data Analytics',
     difficulty: 4,
-    completionDate: '2023',
-    teamSize: 2,
-    technologies: ['Next.js', 'PostgreSQL', 'AWS', 'TypeScript'],
-    impact: 'Optimized fund allocation for 100+ community projects',
-    github: 'https://github.com/swilliams9772/grant-manager',
-    challenges: 'Building complex reporting and impact assessment features',
-    achievements: 'Improved grant distribution efficiency by 40%',
-    description: 'Grant tracking and impact assessment system for health, education, and social justice initiatives.',
-  },
-  {
-    title: 'DALL-E 2 PyTorch Implementation',
-    category: 'Generative AI',
-    difficulty: 5,
-    completionDate: '2023-03-01',
-    teamSize: 2,
-    technologies: ['PyTorch', 'CUDA', 'Docker'],
-    impact: 'Open-source project with 1000+ stars on GitHub',
-    github: 'https://github.com/username/dalle-pytorch',
-    challenges: 'Scaling training to large datasets, optimizing inference speed',
-    achievements: 'Achieved state-of-the-art results on image generation benchmarks',
-    videoPreview: 'https://example.com/dalle-preview.mp4',
-    description: 'An efficient PyTorch implementation of the DALL-E 2 model, capable of generating high-quality images from textual descriptions. This project focuses on optimizing the model for faster inference and improved scalability.',
-    images: [
-      '/placeholder.svg?height=400&width=600',
-      '/placeholder.svg?height=400&width=600',
-      '/placeholder.svg?height=400&width=600',
-    ],
-  },
-  {
-    title: 'Wikipedia Connection Finder',
-    category: 'Network Analysis',
-    difficulty: 4,
-    completionDate: '2022-11-30',
-    teamSize: 1,
-    technologies: ['Python', 'NetworkX', 'Flask'],
-    impact: '10k+ monthly users',
-    github: 'https://github.com/username/wiki-connection-finder',
-    demo: 'https://wiki-connections.com',
-    challenges: 'Efficiently traversing large graph structures',
-    achievements: 'Featured on ProductHunt',
-    videoPreview: 'https://example.com/wiki-connection-preview.mp4',
-    description: 'A web application that finds the shortest path between two Wikipedia articles, showcasing the interconnectedness of knowledge. This project utilizes graph theory and efficient algorithms to quickly navigate the vast network of Wikipedia pages.',
-    images: [
-      '/placeholder.svg?height=400&width=600',
-      '/placeholder.svg?height=400&width=600',
-      '/placeholder.svg?height=400&width=600',
-    ],
-  },
-  {
-    title: 'NYC Education Analytics',
-    category: 'Data Science',
-    difficulty: 4,
-    completionDate: '2022-09-15',
+    completionDate: '2022',
     teamSize: 4,
-    technologies: ['Python', 'Pandas', 'Scikit-learn', 'Tableau'],
-    impact: '20% improvement in educational outcomes',
-    github: 'https://github.com/username/nyc-edu-analytics',
-    challenges: 'Cleaning and integrating data from multiple sources',
-    achievements: 'Presented findings to NYC Department of Education',
-    videoPreview: 'https://example.com/nyc-edu-preview.mp4',
-    description: 'A comprehensive data analysis project that examines various factors affecting educational outcomes in New York City schools. This project involves data cleaning, statistical analysis, and machine learning to identify key areas for improvement in the education system.',
-    images: [
-      '/placeholder.svg?height=400&width=600',
-      '/placeholder.svg?height=400&width=600',
-      '/placeholder.svg?height=400&width=600',
-    ],
-  },
-  {
-    title: 'Multi-Agent RL Environment',
-    category: 'Reinforcement Learning',
-    difficulty: 5,
-    completionDate: '2023-01-20',
-    teamSize: 2,
-    technologies: ['Python', 'TensorFlow', 'OpenAI Gym'],
-    impact: 'Used in multiple research papers',
-    github: 'https://github.com/username/multi-agent-rl',
-    challenges: 'Designing scalable and flexible environment for various RL scenarios',
-    achievements: 'Cited in a major RL textbook',
-    videoPreview: 'https://example.com/multi-agent-rl-preview.mp4',
-    description: 'A flexible and scalable environment for multi-agent reinforcement learning research. This project provides a framework for developing and testing various RL algorithms in complex, multi-agent scenarios, contributing to advancements in cooperative and competitive AI behaviors.',
-    images: [
-      '/placeholder.svg?height=400&width=600',
-      '/placeholder.svg?height=400&width=600',
-      '/placeholder.svg?height=400&width=600',
-    ],
-  },
-  {
-    title: 'Autonomous UAV Fleet',
-    category: 'Robotics & IoT',
-    difficulty: 5,
-    completionDate: '2019-Present',
-    teamSize: 1,
-    technologies: ['Raspberry Pi', 'Arduino', 'Lidar', 'Python'],
-    impact: 'Created fully autonomous fleet of UAVs and model cars',
-    github: 'https://github.com/shaqwilliams/uav-fleet',
-    challenges: 'Integrating multiple hardware components and ensuring reliable autonomous operation',
-    achievements: 'Successfully implemented advanced autonomous navigation systems',
-    description: 'A personal project involving the design and construction of autonomous UAVs and model cars. This project integrates various technologies including Raspberry Pi, Arduino, and Lidar cameras to create a fleet of self-operating vehicles.',
+    technologies: ['Python', 'React', 'AWS', 'TensorFlow', 'PostgreSQL'],
+    impact: 'Improved resource allocation efficiency by 40% across community centers',
+    github: 'https://github.com/swilliams9772/community-platform',
+    challenges: 'Integrating multiple data sources and ensuring real-time updates',
+    achievements: 'Successfully deployed to 40+ community centers',
+    description: 'Platform for optimizing resource distribution and program management across community centers using ML-driven insights.',
     featured: true,
-    images: [
-      '/placeholder.svg?height=400&width=600',
-      '/placeholder.svg?height=400&width=600',
-      '/placeholder.svg?height=400&width=600',
-    ],
   },
+  {
+    title: 'Autonomous Drone Navigation System',
+    category: 'Robotics & Computer Vision',
+    difficulty: 5,
+    completionDate: '2021',
+    teamSize: 2,
+    technologies: ['Python', 'ROS', 'OpenCV', 'TensorFlow', 'C++'],
+    impact: 'Achieved 95% accuracy in autonomous navigation tasks',
+    github: 'https://github.com/swilliams9772/drone-nav',
+    challenges: 'Real-time object detection and path planning in dynamic environments',
+    achievements: 'Published research paper on novel navigation algorithms',
+    description: 'Advanced drone navigation system using computer vision and deep learning for autonomous flight in complex environments.',
+    featured: true,
+  }
 ]
 
 interface ProjectFilter {
@@ -147,7 +66,7 @@ interface ProjectFilter {
   difficulty: string
 }
 
-const Projects = () => {
+export const Projects = () => {
   const [activeVideo, setActiveVideo] = useState<string | null>(null)
   const [selectedProject, setSelectedProject] = useState<Project | null>(null)
   const [filter, setFilter] = useState<ProjectFilter>({ 
@@ -156,7 +75,7 @@ const Projects = () => {
     difficulty: 'All' 
   })
   const [searchTerm, setSearchTerm] = useState('')
-  const [sortOption, setSortOption] = useState('recent')
+  const [sortOption, setSortOption] = useState('date')
   const [currentPage, setCurrentPage] = useState(1)
   const [displayedProjects, setDisplayedProjects] = useState(projects)
   const projectsPerPage = 6
@@ -165,7 +84,6 @@ const Projects = () => {
     const sorted = sortProjects(projects, sortOption)
     const filtered = filterProjects(sorted, filter, searchTerm)
     setDisplayedProjects(filtered)
-    setCurrentPage(1) // Reset to first page when filter changes
   }, [sortOption, filter, searchTerm])
 
   const indexOfLastProject = currentPage * projectsPerPage
@@ -530,6 +448,4 @@ const Projects = () => {
     </section>
   )
 }
-
-export default Projects
 

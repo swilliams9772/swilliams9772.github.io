@@ -14,21 +14,13 @@ export const fadeInUp: Variants = {
       duration: 0.5,
       ease: 'easeOut'
     }
-  },
-  exit: { 
-    opacity: 0, 
-    y: -20,
-    filter: 'blur(10px)',
-    transition: {
-      duration: 0.3
-    }
   }
 }
 
 export const fadeInLeft: Variants = {
   initial: { 
     opacity: 0, 
-    x: -50,
+    x: -20,
     filter: 'blur(10px)'
   },
   animate: { 
@@ -37,8 +29,7 @@ export const fadeInLeft: Variants = {
     filter: 'blur(0px)',
     transition: {
       duration: 0.5,
-      type: 'spring',
-      stiffness: 100
+      ease: 'easeOut'
     }
   }
 }
@@ -46,7 +37,7 @@ export const fadeInLeft: Variants = {
 export const fadeInRight: Variants = {
   initial: { 
     opacity: 0, 
-    x: 50,
+    x: 20,
     filter: 'blur(10px)'
   },
   animate: { 
@@ -55,86 +46,27 @@ export const fadeInRight: Variants = {
     filter: 'blur(0px)',
     transition: {
       duration: 0.5,
-      type: 'spring',
-      stiffness: 100
+      ease: 'easeOut'
     }
   }
 }
 
-export const containerVariants: Variants = {
-  hidden: { 
-    opacity: 0,
-    scale: 0.95
-  },
-  visible: {
-    opacity: 1,
-    scale: 1,
+export const staggerContainer: Variants = {
+  initial: {},
+  animate: {
     transition: {
-      staggerChildren: 0.1,
-      delayChildren: 0.2,
-      type: 'spring',
-      stiffness: 100
+      staggerChildren: 0.1
     }
   }
 }
 
-export const itemVariants: Variants = {
-  hidden: { 
+export const staggerItems = (index: number) => ({
+  initial: { 
     opacity: 0, 
     y: 20,
-    scale: 0.95 
+    scale: 0.8
   },
-  visible: {
-    opacity: 1,
-    y: 0,
-    scale: 1,
-    transition: {
-      type: 'spring',
-      stiffness: 100,
-      damping: 15
-    }
-  }
-}
-
-export const cardHoverVariants: Variants = {
-  rest: {
-    scale: 1,
-    y: 0,
-    transition: {
-      type: 'spring',
-      stiffness: 400,
-      damping: 17
-    }
-  },
-  hover: {
-    scale: 1.02,
-    y: -5,
-    transition: {
-      type: 'spring',
-      stiffness: 400,
-      damping: 17
-    }
-  }
-}
-
-export const staggerContainer = (staggerChildren: number = 0.1, delayChildren: number = 0): Variants => ({
-  hidden: { opacity: 0 },
-  visible: {
-    opacity: 1,
-    transition: {
-      staggerChildren,
-      delayChildren
-    }
-  }
-})
-
-export const staggerItem = (index: number): Variants => ({
-  hidden: { 
-    opacity: 0, 
-    y: 20,
-    scale: 0.95 
-  },
-  visible: { 
+  animate: { 
     opacity: 1, 
     y: 0,
     scale: 1,

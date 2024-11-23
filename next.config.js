@@ -1,18 +1,16 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  output: 'export',
+  output: 'export',  // Enable static exports
   images: {
-    unoptimized: true,
+    unoptimized: true,  // Required for static export
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: '**',
+      },
+    ],
   },
-  reactStrictMode: true,
-  basePath: process.env.NEXT_PUBLIC_BASE_PATH || '',
-  assetPrefix: process.env.NEXT_PUBLIC_BASE_PATH || '',
-  trailingSlash: true,
-  eslint: {
-    // Warning: This allows production builds to successfully complete even if
-    // your project has ESLint errors.
-    ignoreDuringBuilds: true,
-  },
+  basePath: process.env.NODE_ENV === 'production' ? '/tech-portfolio' : '',
 }
 
 module.exports = nextConfig 
