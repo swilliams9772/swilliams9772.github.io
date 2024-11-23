@@ -1,7 +1,7 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  output: 'export',  // Enable static exports
-  basePath: '',      // Base path for GitHub Pages
+  output: 'export',
+  basePath: '',
   images: {
     unoptimized: true,
   },
