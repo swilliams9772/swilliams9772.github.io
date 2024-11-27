@@ -31,13 +31,19 @@ jobs:
       - name: Build with Next.js
         run: npm run build
         
+      - name: Prepare files
+        run: |
+          cp -r out/* .
+          cp out/404.html 404.html || cp out/index.html 404.html
+          touch .nojekyll
+        
       - name: Setup Pages
         uses: actions/configure-pages@v3
         
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v2
         with:
-          path: ./out
+          path: .
 
   deploy:
     environment:
