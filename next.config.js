@@ -4,9 +4,20 @@ const nextConfig = {
   images: {
     unoptimized: true,
   },
+  basePath: '',
+  assetPrefix: '',
   trailingSlash: true,
   experimental: {
-    appDir: true,
+    appDir: false,
+  },
+  async redirects() {
+    return [
+      {
+        source: '/',
+        destination: '/index.html',
+        permanent: true,
+      },
+    ]
   },
 }
 

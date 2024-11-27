@@ -39,11 +39,17 @@ jobs:
       - name: Setup Pages
         uses: actions/configure-pages@v3
         
-      - name: Create static files
+      - name: Prepare deployment
         run: |
+          # Create the site directory
           mkdir -p _site
-          cp -r out/* _site/
-          cp out/index.html _site/404.html
+          # Copy the root index.html
+          cp index.html _site/
+          # Copy the Next.js build output
+          cp -r out _site/
+          # Create 404 page
+          cp _site/out/index.html _site/404.html
+          # Ensure .nojekyll exists
           touch _site/.nojekyll
         
       - name: Upload artifact
