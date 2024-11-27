@@ -31,13 +31,15 @@ jobs:
         run: npm ci
       - name: Build with Next.js
         run: npm run build
-      - name: Copy index.html
+      - name: Prepare output directory
         run: |
           cp out/index.html out/404.html
+          # Ensure index.html exists in root
+          cp out/index.html index.html
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: out
+          path: .
 
   deploy:
     environment:
