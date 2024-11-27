@@ -1,4 +1,4 @@
-name: Deploy Next.js site to Pages
+name: Deploy static content to Pages
 
 on:
   push:
@@ -15,12 +15,17 @@ concurrency:
   cancel-in-progress: false
 
 jobs:
-  build:
+  deploy:
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
+      - name: Checkout
+        uses: actions/checkout@v3
       
-      - uses: actions/setup-node@v3
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
         with:
           node-version: 18
           cache: npm
@@ -28,30 +33,24 @@ jobs:
       - name: Install dependencies
         run: npm ci
         
-      - name: Build with Next.js
+      - name: Build
         run: npm run build
-        
-      - name: Prepare files
-        run: |
-          cp -r out/* .
-          cp out/404.html 404.html || cp out/index.html 404.html
-          touch .nojekyll
         
       - name: Setup Pages
         uses: actions/configure-pages@v3
         
+      - name: Create static files
+        run: |
+          mkdir -p _site
+          cp -r out/* _site/
+          cp out/index.html _site/404.html
+          touch _site/.nojekyll
+        
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v2
         with:
-          path: .
-
-  deploy:
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
-    runs-on: ubuntu-latest
-    needs: build
-    steps:
+          path: _site
+          
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v2
